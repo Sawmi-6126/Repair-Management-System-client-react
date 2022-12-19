@@ -1,0 +1,16 @@
+.name {
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 50px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 2px black, 0 0 25px white;
+}
+
+.tools {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}

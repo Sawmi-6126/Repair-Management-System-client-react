@@ -1,0 +1,68 @@
+.section {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 20%;
+  padding: 20px;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.components {
+  float: right;
+  margin: 15x;
+  /* padding: 8px; */
+  position: static;
+}
+
+.table-control {
+  margin: 20px;
+  margin-top: 10px;
+}
+
+.section-main {
+  margin: 20px;
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
+.search {
+  float: left;
+  margin-top: 25px;
+  position: relative;
+  margin-left: 0;
+}
+
+.bottom-buttons {
+  margin-top: 5px;
+}
+
+.payment-component {
+  width: 100%;
+  margin-top: 100px;
+}
+
+.payment-view {
+  float: left;
+  margin-left: 10px;
+  width: 80%;
+}
+
+.payment-form {
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.form-content,
+.page-content,
+.payment-content,
+.dashboard-content {
+  margin-left: 275px;
+  width: 60%;
+}
