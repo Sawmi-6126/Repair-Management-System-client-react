@@ -12,12 +12,10 @@ import Repair from "./Pages/Repair/Repair";
 import Technician from "./Pages/Technician/Technician";
 import AddTechnician from "./Pages/Technician/AddTechnician";
 import UpdateTechnician from "./Pages/Technician/UpdateTechnician";
-import LandingPage from "./Pages/LandingPage/LandingPage";
 import Signup from "./Pages/Login/Signup";
 import Signin from "./Pages/Login/Signin";
 import AddRepair from "./Pages/Repair/AddRepair";
 import UpdateRepair from "./Pages/Repair/UpdateRepair";
-import Header from "./Components/Sidebar/Header";
 import Payment from "./Pages/Payment/Payment";
 import SidebarLayout from "./SidebarLayout";
 
@@ -36,7 +34,7 @@ function App() {
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/addcustomer" element={<AddCustomer />} />
-            <Route path="/updatecustomer" element={<UpdateCustomer />} />
+            <Route path="/updatecustomer/:id" element={<UpdateCustomer />} />
             <Route path="/parts" element={<Parts />} />
             <Route path="/addparts" element={<AddParts />} />
             <Route path="/updateparts" element={<UpdateParts />} />

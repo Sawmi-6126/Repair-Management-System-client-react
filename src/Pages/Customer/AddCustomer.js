@@ -7,12 +7,33 @@ import "../Styles/Pages.css";
 import * as MdIcons from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 function AddCustomer() {
   const navigate = useNavigate();
 
   const navigateToCustomer = () => {
     navigate("/customer");
+  };
+
+  const [f_name, setF_name] = useState("");
+  const [l_name, setL_name] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+
+  const saveCustomer = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/customer", {
+        f_name,
+        l_name,
+        address,
+        mobile,
+        email,
+      });
+      navigate("/customer");
+    } catch (error) {}
   };
 
   return (
@@ -25,7 +46,7 @@ function AddCustomer() {
           </h5>
           <hr />
         </div>
-        <Form>
+        <Form onSubmit={saveCustomer}>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formBasicText">
               <Form.Label>First Name</Form.Label>
@@ -34,6 +55,8 @@ function AddCustomer() {
                 placeholder="Sawmika"
                 name="f_name"
                 id="f_name"
+                value={f_name}
+                onChange={(e) => setF_name(e.target.value)}
               />
             </Form.Group>
 
@@ -44,6 +67,8 @@ function AddCustomer() {
                 placeholder="Suthakaran"
                 name="l_name"
                 id="l_name"
+                value={l_name}
+                onChange={(e) => setL_name(e.target.value)}
               />
             </Form.Group>
           </Row>
@@ -55,6 +80,8 @@ function AddCustomer() {
                 placeholder="07x xxxxxxx"
                 name="mobile"
                 id="mobile"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
               />
             </Form.Group>
 
@@ -65,6 +92,8 @@ function AddCustomer() {
                 placeholder="abc@gmail.com"
                 name="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
           </Row>
@@ -75,6 +104,8 @@ function AddCustomer() {
               placeholder="Enter address here."
               name="address"
               id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </Form.Group>
           <Button variant="primary" type="submit">

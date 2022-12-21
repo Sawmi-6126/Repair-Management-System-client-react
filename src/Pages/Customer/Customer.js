@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../Styles/Pages.css";
 import * as MdIcons from "react-icons/md";
 import Table from "@mui/material/Table";
@@ -10,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 function Customer() {
   const navigate = useNavigate();
@@ -17,8 +18,54 @@ function Customer() {
   const navigateToAddNewCustomer = () => {
     navigate("/addcustomer");
   };
+
   const navigateToUpdateCustomer = () => {
-    navigate("/updatecustomer");
+    // var answer = window.confirm("Do you want to Update?");
+    // if (answer) {
+    getCustomerbyId();
+    window.location = `/updatecustomer/${id}`;
+    //return true;
+    // } else {
+    //   return false;
+    // }
+  };
+
+  const [customer, setCustomer] = useState([]);
+
+  const [f_name, setF_name] = useState("");
+  const [l_name, setL_name] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const { id } = useParams();
+
+  const getCustomer = async () => {
+    const response = await axios.get("http://localhost:5000/customer");
+    setCustomer(response.data);
+  };
+
+  useEffect(() => {
+    getCustomer();
+  }, []);
+
+  const deleteCustomer = async (id) => {
+    try {
+      if (window.confirm("Are you sure want to delete?")) {
+        await axios.delete(`http://localhost:5000/customer/${id}`);
+        getCustomer();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCustomerbyId = async () => {
+    const response = await axios.get(`http://localhost:5000/customer/${id}`);
+    setF_name(response.data.f_name);
+    setL_name(response.data.l_name);
+    setAddress(response.data.address);
+    setMobile(response.data.mobile);
+    setEmail(response.data.email);
   };
 
   return (
@@ -54,35 +101,39 @@ function Customer() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      Sawmi
-                    </TableCell>
-                    <TableCell align="right">Sutha</TableCell>
-                    <TableCell align="right">0123456</TableCell>
-                    <TableCell align="right">bgfrd</TableCell>
-                    <TableCell align="right">abc@gmail.com</TableCell>
-                    <TableCell align="right">
-                      <Button
-                        variant="contained"
-                        onClick={navigateToUpdateCustomer}
-                      >
-                        <MdIcons.MdCreate />
-                      </Button>{" "}
-                      &nbsp;
-                      <Button
-                        style={{
-                          padding: "5px",
-                          backgroundColor: "red",
-                        }}
-                        variant=""
-                      >
-                        <MdIcons.MdDelete />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
+                  {customer.map((customer, index) => (
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      key={customer.id}
+                    >
+                      <TableCell component="th" scope="row">
+                        {customer.f_name}
+                      </TableCell>
+                      <TableCell align="right">{customer.l_name}</TableCell>
+                      <TableCell align="right">{customer.mobile}</TableCell>
+                      <TableCell align="right">{customer.address}</TableCell>
+                      <TableCell align="right">{customer.email}</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          onClick={navigateToUpdateCustomer}
+                        >
+                          <MdIcons.MdCreate />
+                        </Button>
+                        &nbsp;
+                        <Button
+                          style={{
+                            padding: "5px",
+                            backgroundColor: "red",
+                          }}
+                          variant=""
+                          onClick={() => deleteCustomer(customer.id)}
+                        >
+                          <MdIcons.MdDelete />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
