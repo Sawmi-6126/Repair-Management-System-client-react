@@ -19,17 +19,6 @@ function Customer() {
     navigate("/addcustomer");
   };
 
-  const navigateToUpdateCustomer = () => {
-    // var answer = window.confirm("Do you want to Update?");
-    // if (answer) {
-    getCustomerbyId();
-    window.location = `/updatecustomer/${id}`;
-    //return true;
-    // } else {
-    //   return false;
-    // }
-  };
-
   const [customer, setCustomer] = useState([]);
 
   const [f_name, setF_name] = useState("");
@@ -37,10 +26,11 @@ function Customer() {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const { id } = useParams();
+  //let { id } = useParams();
+  //console.log("id", id);
 
   const getCustomer = async () => {
-    const response = await axios.get("http://localhost:5000/customer");
+    const response = await axios.get("http://localhost:5000/customer/ ");
     setCustomer(response.data);
   };
 
@@ -59,13 +49,18 @@ function Customer() {
     }
   };
 
-  const getCustomerbyId = async () => {
+  const getCustomerbyId = async (id) => {
     const response = await axios.get(`http://localhost:5000/customer/${id}`);
     setF_name(response.data.f_name);
     setL_name(response.data.l_name);
     setAddress(response.data.address);
     setMobile(response.data.mobile);
     setEmail(response.data.email);
+  };
+
+  const navigateToUpdateCustomer = (id) => {
+    getCustomerbyId();
+    navigate(`/updatecustomer/${id}`);
   };
 
   return (
@@ -116,7 +111,7 @@ function Customer() {
                       <TableCell align="right">
                         <Button
                           variant="contained"
-                          onClick={navigateToUpdateCustomer}
+                          onClick={() => navigateToUpdateCustomer(customer.id)}
                         >
                           <MdIcons.MdCreate />
                         </Button>

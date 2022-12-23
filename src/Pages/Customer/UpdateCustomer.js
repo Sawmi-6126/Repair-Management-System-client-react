@@ -38,7 +38,8 @@ function UpdateCustomer() {
         mobile,
         email,
       });
-      navigate("/customer");
+
+      navigateToCustomer();
     } catch (error) {}
   };
 

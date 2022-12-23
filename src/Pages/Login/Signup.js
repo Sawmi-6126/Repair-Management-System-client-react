@@ -4,11 +4,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import tools from "../../Images/landingpage.jpg";
+import axios from "axios";
 
 function Signup() {
   const navigate = useNavigate();
   const navigateToSignin = () => {
     navigate("/");
+  };
+
+  const [username, setUsernameReg] = useState("");
+  const [password, setPasswordReg] = useState("");
+  const [passwordCheck, setPasswordCheckReg] = useState("");
+
+  const signup = () => {
+    axios
+      .post("http://localhost:5000/signup", {
+        username: username,
+        password: password,
+        passwordCheck: passwordCheck,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
@@ -35,6 +52,9 @@ function Signup() {
               className="form-control mt-1"
               placeholder="Username"
               id="username"
+              onChange={(e) => {
+                setUsernameReg(e.target.value);
+              }}
             />
           </div>
           <div className="form-group mt-3">
@@ -44,6 +64,9 @@ function Signup() {
               className="form-control mt-1"
               placeholder="Password"
               id="password"
+              onChange={(e) => {
+                setPasswordReg(e.target.value);
+              }}
             />
           </div>
           <div className="form-group mt-3">
@@ -53,10 +76,13 @@ function Signup() {
               className="form-control mt-1"
               placeholder="Re-Enter Password"
               id="passwordcheck"
+              onChange={(e) => {
+                setPasswordCheckReg(e.target.value);
+              }}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={signup}>
               Register
             </button>
           </div>
