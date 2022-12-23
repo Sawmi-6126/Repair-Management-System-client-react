@@ -27,12 +27,14 @@ function AddRepair() {
         </div>
 
         <Form method="POST">
-          <Row className="mb-3">
+          <Row className="mb-2">
             <Form.Label>Job Id</Form.Label>
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-1">
               <Form.Control
+                type="text"
                 placeholder=""
                 aria-label=""
+                maxLength="100"
                 aria-describedby="basic-addon2"
               />
               <Button variant="outline-secondary" id="button-addon2">
@@ -40,7 +42,7 @@ function AddRepair() {
               </Button>
             </InputGroup>
           </Row>
-          <Row className="mb-3">
+          <Row className="mb-2">
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Label>Customer mobile</Form.Label>
               <Form.Control type="text" placeholder="" />
@@ -50,7 +52,7 @@ function AddRepair() {
               <Form.Control type="text" placeholder="" />
             </Form.Group>
           </Row>
-          <Row className="mb-3">
+          <Row className="mb-2">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Machine Type</Form.Label>
               <Form.Control type="text" placeholder="" />
@@ -60,7 +62,7 @@ function AddRepair() {
               <Form.Control placeholder="" />
             </Form.Group>
           </Row>
-          <Row className="mb-3">
+          <Row className="mb-2">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Color </Form.Label>
               <Form.Control type="text" placeholder="" />
@@ -75,7 +77,7 @@ function AddRepair() {
               </Form.Select>
             </Form.Group>
           </Row>
-          <Row className="mb-3">
+          <Row className="mb-2">
             <Form.Group as={Col} controlId="formGridAddress2">
               <Form.Label>Received Date </Form.Label>
               <Form.Control type="Date" placeholder="" />
@@ -90,19 +92,27 @@ function AddRepair() {
               </Form.Select>
             </Form.Group>
           </Row>
-          <div className="bottom-buttons">
-            <Button variant="primary" type="submit" onClick={navigateToRepair}>
-              Save
-            </Button>
-            &nbsp;
-            <Button
-              variant="secondary"
-              type="submit"
-              onClick={navigateToRepair}
-            >
-              Cancel
-            </Button>
-          </div>
+          <Row className="mb-2">
+            <div className="bottom-buttons">
+              <Button
+                variant="primary"
+                size="lg"
+                type="submit"
+                onClick={navigateToRepair}
+              >
+                Save
+              </Button>
+              &nbsp;
+              <Button
+                variant="secondary"
+                size="lg"
+                type="submit"
+                onClick={navigateToRepair}
+              >
+                Cancel
+              </Button>
+            </div>
+          </Row>
         </Form>
       </section>
     </div>
