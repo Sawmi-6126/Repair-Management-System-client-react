@@ -21,7 +21,7 @@
   background-color: white;
   transform: translate(-50%, -50%);
   top: 50%;
-  left: 25%;
+  left: 20%;
   position: fixed;
 }
 
@@ -45,7 +45,7 @@ label {
 }
 
 .login {
-  float: left;
+  float: right;
   width: 300px;
   height: 300px;
   margin: 20px;
@@ -56,10 +56,7 @@ label {
 }
 
 .tools {
-  display: flex;
-  margin-left: 40%;
-  margin-top: 5%;
   filter: blur(2px);
-  -webkit-filter: blur(0.5px);
-  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  -webkit-filter: blur(0.75px);
+  margin-left: 20%;
 }

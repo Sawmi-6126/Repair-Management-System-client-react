@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Pages.css";
@@ -11,6 +11,17 @@ function Technician() {
   const navigateToAddTechnician = () => {
     navigate("/addtechnician");
   };
+
+  const [technician, setTechnician] = useState([]);
+
+  const [name, setName] = useState("");
+  const [nic, setNic] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [appointment, setAppointment] = useState("");
+  const [epfno, setEpfno] = useState("");
+  const [salary, setSalary] = useState("");
+  const [address, setAddress] = useState("");
+
   const navigateToUpdateTechnician = () => {
     navigate("/updatetechnician");
   };

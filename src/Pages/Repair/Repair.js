@@ -11,6 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 function Repair() {
   const navigate = useNavigate();
@@ -18,8 +19,53 @@ function Repair() {
   const navigateToAddNewRepair = () => {
     navigate("/addrepair");
   };
-  const navigateToUpdateRepair = () => {
-    navigate("/updaterepair");
+
+  const [repair, setRepair] = useState([]);
+
+  const [job_id, setJob_id] = useState("");
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
+  const [r_Date, setR_date] = useState("");
+  const [technician, setTechnician] = useState("");
+  const [status, setStatus] = useState("");
+
+  const getRepair = async () => {
+    const response = await axios.get("http://localhost:5000/repair");
+    setRepair(response.data);
+  };
+
+  useEffect(() => {
+    getRepair();
+  }, []);
+
+  const deleteRepair = async (id) => {
+    try {
+      if (window.confirm("Are you sure want to delete?")) {
+        await axios.delete(`http://localhost:5000/repair/${id}`);
+        getRepair();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getRepairbyId = async (id) => {
+    const response = await axios.get(`http://localhost:5000/repair/${id}`);
+    setJob_id(response.data.job_id);
+    setName(response.data.name);
+    setType(response.data.type);
+    setBrand(response.data.brand);
+    setColor(response.data.color);
+    setR_date(response.data.r_Date);
+    setTechnician(response.data.technician);
+    setStatus(response.data.status);
+  };
+
+  const navigateToUpdateRepair = (id) => {
+    getRepairbyId();
+    navigate(`/updaterepair/${id}`);
   };
 
   return (
@@ -57,85 +103,45 @@ function Repair() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    456
-                  </TableCell>
-                  <TableCell align="right">sawmi</TableCell>
-                  <TableCell align="right">0123654</TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right">
-                    <Button
-                      variant="contained"
-                      onClick={navigateToUpdateRepair}
-                    >
-                      <MdIcons.MdCreate />
-                    </Button>{" "}
-                    &nbsp;
-                    <Button
-                      style={{
-                        padding: "5px",
-                        backgroundColor: "red",
-                      }}
-                      variant=""
-                    >
-                      <MdIcons.MdDelete />
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                {repair.map((repair, index) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={repair.id}
+                  >
+                    <TableCell component="th" scope="row">
+                      {repair.job_id}
+                    </TableCell>
+                    <TableCell align="right">{repair.name}</TableCell>
+                    <TableCell align="right">{repair.type}</TableCell>
+                    <TableCell align="right">{repair.brand}</TableCell>
+                    <TableCell align="right">{repair.color}</TableCell>
+                    <TableCell align="right">{repair.r_Date}</TableCell>
+                    <TableCell align="right">{repair.technician}</TableCell>
+                    <TableCell align="right">{repair.status}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        onClick={() => navigateToUpdateRepair(repair.id)}
+                      >
+                        <MdIcons.MdCreate />
+                      </Button>
+                      &nbsp;
+                      <Button
+                        style={{
+                          padding: "5px",
+                          backgroundColor: "red",
+                        }}
+                        variant=""
+                        onClick={deleteRepair(repair.id)}
+                      >
+                        <MdIcons.MdDelete />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
-          {/* <Table striped className="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Job_id</th>
-                <th>Customer Name</th>
-                <th>Type</th>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Received Date</th>
-                <th>Technician</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>4532</td>
-                <td>Sawmika</td>
-                <td>Drill</td>
-                <td>Hugo</td>
-                <td>Red</td>
-                <td>12/12/2022</td>
-                <td>Thanu</td>
-                <td>On Progress</td>
-                <td>
-                  <Button variant="contained" onClick={navigateToUpdateRepair}>
-                    <MdIcons.MdCreate />
-                  </Button>{" "}
-                  &nbsp;
-                  <Button
-                    style={{
-                      padding: "5px",
-                      backgroundColor: "red",
-                    }}
-                    variant=""
-                  >
-                    <MdIcons.MdDelete />
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table> */}
         </div>
       </section>
     </div>

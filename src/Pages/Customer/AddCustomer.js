@@ -48,7 +48,7 @@ function AddCustomer() {
         </div>
         <Form onSubmit={saveCustomer}>
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formBasicText">
+            <Form.Group as={Col}>
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
@@ -60,7 +60,7 @@ function AddCustomer() {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formBasicText">
+            <Form.Group as={Col}>
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
@@ -73,7 +73,7 @@ function AddCustomer() {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formBasicText">
+            <Form.Group as={Col}>
               <Form.Label>Mobile No.</Form.Label>
               <Form.Control
                 type="Number"
@@ -85,7 +85,7 @@ function AddCustomer() {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -97,7 +97,7 @@ function AddCustomer() {
               />
             </Form.Group>
           </Row>
-          <Form.Group className="mb-3" controlId="formGridAddress2">
+          <Form.Group className="mb-3">
             <Form.Label>Address </Form.Label>
             <Form.Control
               type="text"

@@ -1,5 +1,4 @@
 import "./App.css";
-import Sidebar from "./Components/Sidebar/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Customer from "./Pages/Customer/Customer";
@@ -18,15 +17,15 @@ import AddRepair from "./Pages/Repair/AddRepair";
 import UpdateRepair from "./Pages/Repair/UpdateRepair";
 import Payment from "./Pages/Payment/Payment";
 import SidebarLayout from "./SidebarLayout";
+import RepairParts from "./Pages/Repair/RepairParts";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/" exact element={<Signin />} />
-          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
 
         <Routes>
@@ -37,13 +36,17 @@ function App() {
             <Route path="/updatecustomer/:id" element={<UpdateCustomer />} />
             <Route path="/parts" element={<Parts />} />
             <Route path="/addparts" element={<AddParts />} />
-            <Route path="/updateparts" element={<UpdateParts />} />
+            <Route path="/updateparts/:id" element={<UpdateParts />} />
             <Route path="/repair" element={<Repair />} />
             <Route path="/addrepair" element={<AddRepair />} />
-            <Route path="/updaterepair" element={<UpdateRepair />} />
+            <Route path="/repairparts" element={<RepairParts />} />
+            <Route path="/updaterepair/:id" element={<UpdateRepair />} />
             <Route path="/technician" element={<Technician />} />
             <Route path="/addtechnician" element={<AddTechnician />} />
-            <Route path="/updatetechnician" element={<UpdateTechnician />} />
+            <Route
+              path="/updatetechnician/:id"
+              element={<UpdateTechnician />}
+            />
             <Route path="/payment" element={<Payment />} />
           </Route>
         </Routes>

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import tools from "../../Images/landingpage.jpg";
 import axios from "axios";
+import { Formik, ErrorMessage, Form, Field } from "formik";
+import * as Yup from "yup";
 
 function Signup() {
   const navigate = useNavigate();
@@ -12,20 +14,22 @@ function Signup() {
     navigate("/");
   };
 
-  const [username, setUsernameReg] = useState("");
-  const [password, setPasswordReg] = useState("");
-  const [passwordCheck, setPasswordCheckReg] = useState("");
+  const initialValues = {
+    username: "",
+    password: "",
+  };
 
-  const signup = () => {
-    axios
-      .post("http://localhost:5000/signup", {
-        username: username,
-        password: password,
-        passwordCheck: passwordCheck,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().min(5).max(15).required(),
+    password: Yup.string().min(4).max(20).required(),
+  });
+
+  const onSubmit = (data) => {
+    axios.post("http://localhost:5000/signup", data).then(() => {
+      console.log(data);
+      window.alert("User Registered Successfully");
+      navigate("/");
+    });
   };
 
   return (
@@ -36,58 +40,61 @@ function Signup() {
         className="tools"
         style={{ width: "50%", height: "100%" }}
       />
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h2 className="Auth-form-title">Sign Up</h2>
-          <div className="text-center">
-            Already registered?{" "}
-            <span className="link-primary" onClick={navigateToSignin}>
-              Sign In
-            </span>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form className="Auth-form">
+          <div className="Auth-form-content">
+            <h2 className="Auth-form-title">Sign Up</h2>
+            <div className="text-center">
+              Already registered?{" "}
+              <span className="link-primary" onClick={navigateToSignin}>
+                Sign In
+              </span>
+            </div>
+            <div className="form-group mt-3">
+              <label>Username</label>
+              <Field
+                type="String"
+                className="form-control mt-1"
+                placeholder="Username..."
+                id="username"
+                name="username"
+                autoComplete="off"
+              />
+              <ErrorMessage name="username" />
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <Field
+                type="password"
+                className="form-control mt-1"
+                placeholder="Password..."
+                id="password"
+                name="password"
+                autoComplete="off"
+              />
+              <ErrorMessage name="password" />
+            </div>
+            {/* <div className="form-group mt-3">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Re-Enter Password"
+                id="passwordcheck"
+              />
+            </div> */}
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-primary">
+                Register
+              </button>
+            </div>
           </div>
-          <div className="form-group mt-3">
-            <label>Username</label>
-            <input
-              type="String"
-              className="form-control mt-1"
-              placeholder="Username"
-              id="username"
-              onChange={(e) => {
-                setUsernameReg(e.target.value);
-              }}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Password"
-              id="password"
-              onChange={(e) => {
-                setPasswordReg(e.target.value);
-              }}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Re-Enter Password"
-              id="passwordcheck"
-              onChange={(e) => {
-                setPasswordCheckReg(e.target.value);
-              }}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" onClick={signup}>
-              Register
-            </button>
-          </div>
-        </div>
-      </form>
+        </Form>
+      </Formik>
     </div>
   );
 }

@@ -8,13 +8,13 @@ import * as MdIcons from "react-icons/md";
 export const SidebarData = [
   {
     title: "Dashboard",
-    path: "dashboard",
+    path: "/dashboard",
     icon: <FaIcons.FaTachometerAlt />,
     cName: "nav-text",
   },
   {
     title: "Customer",
-    path: "customer",
+    path: "/customer",
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
@@ -32,25 +32,25 @@ export const SidebarData = [
   },
   {
     title: "Parts Pool",
-    path: "parts",
+    path: "/parts",
     icon: <FaIcons.FaToolbox />,
     cName: "nav-text",
   },
   {
     title: "Technician",
-    path: "technician",
+    path: "/technician",
     icon: <MdIcons.MdManageAccounts />,
     cName: "nav-text",
   },
   {
     title: "Payment",
-    path: "payment",
+    path: "/payment",
     icon: <FaIcons.FaMoneyBillWave />,
     cName: "nav-text",
   },
   {
     title: "Report",
-    path: "report",
+    path: "/report",
     icon: <HiIcons.HiDocumentReport />,
     cName: "nav-text",
   },

@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/Pages.css";
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
-import Table from "react-bootstrap/Table";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 function Parts() {
   const navigate = useNavigate();
@@ -33,44 +39,49 @@ function Parts() {
           </Button>
         </div>
         <div className="table-control">
-          <Table striped className="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Barcode</th>
-                <th>Description</th>
-                <th>Unit price</th>
-                <th>Quantity</th>
-                <th>Discount</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>TN121</td>
-                <td>Armature</td>
-                <td>7,500</td>
-                <td>10</td>
-                <td>10%</td>
-                <td>
-                  <Button variant="contained" onClick={navigateToUpdateParts}>
-                    <MdIcons.MdCreate />
-                  </Button>{" "}
-                  &nbsp;
-                  <Button
-                    style={{
-                      padding: "5px",
-                      backgroundColor: "red",
-                    }}
-                    variant=""
-                  >
-                    <MdIcons.MdDelete />
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Barcode</TableCell>
+                  <TableCell align="right">Description</TableCell>
+                  <TableCell align="right">Unit price</TableCell>
+                  <TableCell align="right">Quantity</TableCell>
+                  <TableCell align="right">Discount</TableCell>
+                  <TableCell align="right">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right">
+                    {/* <Button
+                      variant="contained"
+                      onClick={() => navigateToUpdateParts()}
+                    >
+                      <MdIcons.MdCreate />
+                    </Button>
+                    &nbsp;
+                    <Button
+                      style={{
+                        padding: "5px",
+                        backgroundColor: "red",
+                      }}
+                      variant=""
+                    >
+                      <MdIcons.MdDelete />
+                    </Button> */}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </section>
     </div>

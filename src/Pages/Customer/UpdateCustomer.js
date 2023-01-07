@@ -25,7 +25,7 @@ function UpdateCustomer() {
   const { id } = useParams();
 
   useEffect(() => {
-    getCustomerbyId();
+    getCustomerbyId(id);
   });
 
   const updateCustomer = async (e) => {
@@ -38,7 +38,6 @@ function UpdateCustomer() {
         mobile,
         email,
       });
-
       navigateToCustomer();
     } catch (error) {}
   };
