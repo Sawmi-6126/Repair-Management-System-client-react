@@ -18,6 +18,7 @@ import UpdateRepair from "./Pages/Repair/UpdateRepair";
 import Payment from "./Pages/Payment/Payment";
 import SidebarLayout from "./SidebarLayout";
 import RepairParts from "./Pages/Repair/RepairParts";
+import RepairNavLayout from "./RepairNavLayout";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
 
         <Routes>
           <Route element={<SidebarLayout />}>
-            <Route path="/dashboard" exact element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/addcustomer" element={<AddCustomer />} />
             <Route path="/updatecustomer/:id" element={<UpdateCustomer />} />
@@ -39,8 +40,10 @@ function App() {
             <Route path="/updateparts/:id" element={<UpdateParts />} />
             <Route path="/repair" element={<Repair />} />
             <Route path="/addrepair" element={<AddRepair />} />
-            <Route path="/repairparts" element={<RepairParts />} />
-            <Route path="/updaterepair/:id" element={<UpdateRepair />} />
+            <Route element={<RepairNavLayout />}>
+              <Route path="/repairparts" element={<RepairParts />} />
+              <Route path="/updaterepair/:id" element={<UpdateRepair />} />
+            </Route>
             <Route path="/technician" element={<Technician />} />
             <Route path="/addtechnician" element={<AddTechnician />} />
             <Route

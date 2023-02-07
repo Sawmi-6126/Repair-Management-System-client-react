@@ -8,7 +8,6 @@ import * as MdIcons from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Customer from "./Customer.js";
 
 function UpdateCustomer() {
   const navigate = useNavigate();
@@ -25,21 +24,23 @@ function UpdateCustomer() {
   const { id } = useParams();
 
   useEffect(() => {
-    getCustomerbyId(id);
-  });
+    getCustomerbyId();
+  }, []);
 
-  const updateCustomer = async (e) => {
+  const editCustomer = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/customer/${id}`, {
+      await axios.patch(`http://localhost:5000/customer/${id}`, {
         f_name,
         l_name,
-        address,
         mobile,
+        address,
         email,
       });
-      navigateToCustomer();
-    } catch (error) {}
+      navigate("/customer");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCustomerbyId = async () => {
@@ -57,11 +58,11 @@ function UpdateCustomer() {
         <div className="col-md-6">
           <h5>
             <MdIcons.MdPersonAddAlt1 /> &nbsp;
-            <b>Update Customer</b>
+            <b>Edit Customer</b>
           </h5>
           <hr />
         </div>
-        <Form onSubmit={updateCustomer(id)}>
+        <Form onSubmit={editCustomer}>
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>First Name</Form.Label>
@@ -71,6 +72,7 @@ function UpdateCustomer() {
                 id="f_name"
                 value={f_name}
                 onChange={(e) => setF_name(e.target.value)}
+                disabled="true"
               />
             </Form.Group>
 
@@ -82,6 +84,7 @@ function UpdateCustomer() {
                 id="l_name"
                 value={l_name}
                 onChange={(e) => setL_name(e.target.value)}
+                disabled="true"
               />
             </Form.Group>
           </Row>

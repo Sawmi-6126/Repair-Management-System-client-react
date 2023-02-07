@@ -15,36 +15,18 @@ import InputGroup from "react-bootstrap/InputGroup";
 function Payment() {
   return (
     <div className="payment-content">
-      <div className="payment-view">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Job_id</TableCell>
-                <TableCell align="right">Customer Name</TableCell>
-                <TableCell align="right">Invoice No</TableCell>
-                <TableCell align="right">Brand</TableCell>
-                <TableCell align="right">Color</TableCell>
-                <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-        </TableContainer>
-      </div>
-      <br></br>
       <div className="payment-form">
-        <h4>Payment</h4>
+        <h6>Payment</h6>
         <hr></hr>
         <div className="form-content">
           <Form>
             <Row>
               <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
+                <Form.Label column sm="3">
                   Job Id
                 </Form.Label>
                 <Col sm="9">
-                  <InputGroup className="mb-3">
+                  <InputGroup className="mb-3" size="sm">
                     <Form.Control
                       placeholder=""
                       aria-label=""
@@ -65,7 +47,7 @@ function Payment() {
                   Customer
                 </Form.Label>
                 <Col sm="9">
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control type="text" placeholder="" size="sm" />
                 </Col>
               </Form.Group>
             </Row>
@@ -78,6 +60,24 @@ function Payment() {
             </Button>
           </Form>
         </div>
+      </div>
+      <br></br>
+      <div className="payment-view">
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Job_id</TableCell>
+                <TableCell align="right">Customer Name</TableCell>
+                <TableCell align="right">Invoice No</TableCell>
+                <TableCell align="right">Brand</TableCell>
+                <TableCell align="right">Color</TableCell>
+                <TableCell align="right">Status</TableCell>
+                <TableCell align="right">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );

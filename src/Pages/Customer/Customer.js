@@ -21,22 +21,15 @@ function Customer() {
 
   const [customer, setCustomer] = useState([]);
 
-  const [f_name, setF_name] = useState("");
-  const [l_name, setL_name] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  //let { id } = useParams();
-  //console.log("id", id);
-
-  const getCustomer = async () => {
-    const response = await axios.get("http://localhost:5000/customer/ ");
-    setCustomer(response.data);
-  };
-
   useEffect(() => {
     getCustomer();
   }, []);
+
+  const getCustomer = async () => {
+    const response = await axios.get("http://localhost:5000/customer");
+    setCustomer(response.data);
+    console.log(response.data);
+  };
 
   const deleteCustomer = async (id) => {
     try {
@@ -49,17 +42,7 @@ function Customer() {
     }
   };
 
-  const getCustomerbyId = async (id) => {
-    const response = await axios.get(`http://localhost:5000/customer/${id}`);
-    setF_name(response.data.f_name);
-    setL_name(response.data.l_name);
-    setAddress(response.data.address);
-    setMobile(response.data.mobile);
-    setEmail(response.data.email);
-  };
-
   const navigateToUpdateCustomer = (id) => {
-    getCustomerbyId();
     navigate(`/updatecustomer/${id}`);
   };
 

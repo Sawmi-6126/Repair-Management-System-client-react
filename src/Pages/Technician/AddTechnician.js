@@ -18,11 +18,11 @@ function AddTechnician() {
 
   const [name, setName] = useState("");
   const [nic, setNic] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [t_mobile, setMobile] = useState("");
+  const [appointmentType, setAppointmenttype] = useState("");
   const [epfno, setEpfno] = useState("");
   const [salary, setSalary] = useState("");
-  const [address, setAddress] = useState("");
-  const [appointmentType, setAppointmenttype] = useState("");
+  const [t_address, setAddress] = useState("");
 
   const saveTechnician = async (e) => {
     e.preventDefault();
@@ -30,14 +30,16 @@ function AddTechnician() {
       await axios.post("http://localhost:5000/technician", {
         name,
         nic,
-        mobile,
+        t_mobile,
         appointmentType,
         epfno,
         salary,
-        address,
+        t_address,
       });
       navigate("/technician");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -50,7 +52,7 @@ function AddTechnician() {
           </h5>
           <hr />
         </div>
-        <Form onClick={saveTechnician}>
+        <Form onSubmit={saveTechnician}>
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>Name</Form.Label>
@@ -78,7 +80,7 @@ function AddTechnician() {
               <Form.Control
                 type="String"
                 placeholder=""
-                value={mobile}
+                value={t_mobile}
                 onChange={(e) => setMobile(e.target.value)}
               />
             </Form.Group>
@@ -122,7 +124,7 @@ function AddTechnician() {
               <Form.Control
                 type="String"
                 placeholder=""
-                value={address}
+                value={t_address}
                 onChange={(e) => setAddress(e.target.value)}
               />
             </Form.Group>

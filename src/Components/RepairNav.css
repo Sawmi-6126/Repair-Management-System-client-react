@@ -1,0 +1,14 @@
+/* .repairnav {
+  height: 50px;
+}
+
+.nav-container {
+  font-size: large;
+} */
+
+.buttonGroup {
+  background-color: darkslateblue;
+  margin: 10px 25px;
+  padding: 7px;
+  justify-content: center;
+}

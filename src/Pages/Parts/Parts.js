@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Pages.css";
@@ -11,6 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 function Parts() {
   const navigate = useNavigate();
@@ -18,8 +19,31 @@ function Parts() {
   const navigateToAddParts = () => {
     navigate("/addparts");
   };
-  const navigateToUpdateParts = () => {
-    navigate("/updateparts");
+  const navigateToUpdateParts = (id) => {
+    navigate(`/updateparts/${id}`);
+  };
+
+  const [parts, setParts] = useState([]);
+
+  useEffect(() => {
+    getParts();
+  }, []);
+
+  const getParts = async () => {
+    const response = await axios.get("http://localhost:5000/parts");
+    setParts(response.data);
+    console.log(response.data);
+  };
+
+  const deleteParts = async (id) => {
+    try {
+      if (window.confirm("Are you sure want to delete?")) {
+        await axios.delete(`http://localhost:5000/parts/${id}`);
+        getParts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -35,7 +59,7 @@ function Parts() {
         <div className="components">
           <Button variant="contained" onClick={navigateToAddParts}>
             <MdIcons.MdAdd />
-            Add New Parts
+            Add New Part
           </Button>
         </div>
         <div className="table-control">
@@ -52,33 +76,39 @@ function Parts() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right">
-                    {/* <Button
-                      variant="contained"
-                      onClick={() => navigateToUpdateParts()}
-                    >
-                      <MdIcons.MdCreate />
-                    </Button>
-                    &nbsp;
-                    <Button
-                      style={{
-                        padding: "5px",
-                        backgroundColor: "red",
-                      }}
-                      variant=""
-                    >
-                      <MdIcons.MdDelete />
-                    </Button> */}
-                  </TableCell>
-                </TableRow>
+                {parts.map((parts, index) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={parts.id}
+                  >
+                    <TableCell component="th" scope="row">
+                      {parts.barcode}
+                    </TableCell>
+                    <TableCell align="right">{parts.description}</TableCell>
+                    <TableCell align="right">{parts.unit_price}</TableCell>
+                    <TableCell align="right">{parts.quantity}</TableCell>
+                    <TableCell align="right">{parts.discount}%</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        onClick={() => navigateToUpdateParts(parts.id)}
+                      >
+                        <MdIcons.MdCreate />
+                      </Button>
+                      &nbsp;
+                      <Button
+                        style={{
+                          padding: "5px",
+                          backgroundColor: "red",
+                        }}
+                        variant=""
+                        onClick={() => deleteParts(parts.id)}
+                      >
+                        <MdIcons.MdDelete />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

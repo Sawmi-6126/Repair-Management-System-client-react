@@ -20,8 +20,8 @@ function Signup() {
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(5).max(15).required(),
-    password: Yup.string().min(4).max(20).required(),
+    username: Yup.string().min(5).max(15).required("Username is Required"),
+    password: Yup.string().min(4).max(20).required("Password is Required"),
   });
 
   const onSubmit = (data) => {
@@ -75,6 +75,7 @@ function Signup() {
                 id="password"
                 name="password"
                 autoComplete="off"
+                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
               />
               <ErrorMessage name="password" />
             </div>

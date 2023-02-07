@@ -22,23 +22,15 @@ function Repair() {
 
   const [repair, setRepair] = useState([]);
 
-  const [job_id, setJob_id] = useState("");
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [brand, setBrand] = useState("");
-  const [color, setColor] = useState("");
-  const [r_Date, setR_date] = useState("");
-  const [technician, setTechnician] = useState("");
-  const [status, setStatus] = useState("");
+  useEffect(() => {
+    getRepair();
+  }, []);
 
   const getRepair = async () => {
     const response = await axios.get("http://localhost:5000/repair");
     setRepair(response.data);
+    console.log(response.data);
   };
-
-  useEffect(() => {
-    getRepair();
-  }, []);
 
   const deleteRepair = async (id) => {
     try {
@@ -51,20 +43,7 @@ function Repair() {
     }
   };
 
-  const getRepairbyId = async (id) => {
-    const response = await axios.get(`http://localhost:5000/repair/${id}`);
-    setJob_id(response.data.job_id);
-    setName(response.data.name);
-    setType(response.data.type);
-    setBrand(response.data.brand);
-    setColor(response.data.color);
-    setR_date(response.data.r_Date);
-    setTechnician(response.data.technician);
-    setStatus(response.data.status);
-  };
-
   const navigateToUpdateRepair = (id) => {
-    getRepairbyId();
     navigate(`/updaterepair/${id}`);
   };
 
@@ -88,7 +67,12 @@ function Repair() {
 
         <div className="table-control">
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table
+              sx={{ minWidth: 650 }}
+              aria-label="simple table"
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            >
               <TableHead>
                 <TableRow>
                   <TableCell>Job_id</TableCell>
@@ -111,11 +95,11 @@ function Repair() {
                     <TableCell component="th" scope="row">
                       {repair.job_id}
                     </TableCell>
-                    <TableCell align="right">{repair.name}</TableCell>
-                    <TableCell align="right">{repair.type}</TableCell>
-                    <TableCell align="right">{repair.brand}</TableCell>
+                    <TableCell align="right">{repair.customer_name}</TableCell>
+                    <TableCell align="right">{repair.m_type}</TableCell>
+                    <TableCell align="right">{repair.m_brand}</TableCell>
                     <TableCell align="right">{repair.color}</TableCell>
-                    <TableCell align="right">{repair.r_Date}</TableCell>
+                    <TableCell align="right">{repair.received_date}</TableCell>
                     <TableCell align="right">{repair.technician}</TableCell>
                     <TableCell align="right">{repair.status}</TableCell>
                     <TableCell align="right">
@@ -132,7 +116,7 @@ function Repair() {
                           backgroundColor: "red",
                         }}
                         variant=""
-                        onClick={deleteRepair(repair.id)}
+                        onClick={() => deleteRepair(repair.id)}
                       >
                         <MdIcons.MdDelete />
                       </Button>

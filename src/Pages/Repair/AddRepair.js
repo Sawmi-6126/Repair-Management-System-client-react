@@ -8,7 +8,6 @@ import * as MdIcons from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
-import Select from "react-select";
 import axios from "axios";
 import ReactToPrint from "react-to-print";
 
@@ -19,30 +18,43 @@ function AddRepair() {
     navigate("/repair");
   };
 
-  const [job_id, setJob_id] = useState("");
   const [mobile, setMobile] = useState("");
   const [customer_name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [brand, setBrand] = useState("");
+
+  const [job_id, setJob_id] = useState("");
+  const [m_type, setType] = useState("");
+  const [m_brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [received_date, setR_date] = useState("");
   const [technician, setTechnician] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [status, setStatus] = useState("");
 
   const saveRepair = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/repair", {
         job_id,
-        customer_name,
-        type,
-        brand,
+        //customer_name,
+        m_type,
+        m_brand,
         color,
         received_date,
         technician,
-        selectedStatus,
+        status,
       });
       navigate("/repair");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCustomerName = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.get("http://localhost:5000/customer", {
+        mobile,
+        customer_name,
+      });
     } catch (error) {}
   };
 
@@ -52,20 +64,68 @@ function AddRepair() {
         <div className="col-md-6">
           <h5>
             <MdIcons.MdPersonAddAlt1 /> &nbsp;
+            <b>Customer Details</b>
+          </h5>
+          <hr />
+        </div>
+        <Form>
+          <Row className="mb-2">
+            <Form.Group>
+              <Form.Label>Customer mobile</Form.Label>
+              <InputGroup className="mb-1">
+                <Form.Control
+                  type="number"
+                  placeholder=""
+                  size="sm"
+                  aria-label=""
+                  aria-describedby="basic-addon2"
+                  id="mobile"
+                  name="mobile"
+                  autoComplete="off"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+                <Button
+                  variant="primary"
+                  id="button-addon2"
+                  onClick={getCustomerName}
+                >
+                  Search
+                </Button>
+              </InputGroup>
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Customer Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder=""
+                id="name"
+                name="name"
+                autoComplete="off"
+                value={customer_name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+          </Row>
+        </Form>
+        &nbsp;
+        <div className="col-md-6">
+          <h5>
+            <MdIcons.MdPersonAddAlt1 /> &nbsp;
             <b>Add New Task</b>
           </h5>
           <hr />
         </div>
-
         <Form onSubmit={saveRepair}>
           <Row className="mb-2">
             <Form.Label>Job Id</Form.Label>
             <InputGroup className="mb-1">
               <Form.Control
+                size="sm"
                 type="text"
                 placeholder=""
                 aria-label=""
-                maxLength="50"
                 aria-describedby="basic-addon2"
                 id="job_id"
                 name="job_id"
@@ -78,65 +138,57 @@ function AddRepair() {
             </InputGroup>
           </Row>
           <Row className="mb-2">
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Customer mobile</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                id="mobile"
-                name="mobile"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Customer Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                id="name"
-                name="name"
-                value={customer_name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
-          </Row>
-          <Row className="mb-2">
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Machine Type</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                id="type"
-                name="type"
-                value={type}
+              <Form.Select
+                aria-label="Default select example"
+                value={m_type}
                 onChange={(e) => setType(e.target.value)}
-              />
+              >
+                <option> </option>
+                <option> Drill </option>
+                <option> Angle Grinder </option>
+                <option> Air Compressor </option>
+                <option> Rotary Hammer </option>
+                <option> Jig Saw </option>
+                <option> Circular Saw </option>
+                <option> Brush Cutter </option>
+                <option> Welding Plant </option>
+              </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridAddress2">
+            <Form.Group as={Col}>
               <Form.Label>Brand</Form.Label>
-              <Form.Control
-                placeholder=""
-                id="brand"
-                name="brand"
-                value={brand}
+              <Form.Select
+                aria-label="Default select example"
+                value={m_brand}
                 onChange={(e) => setBrand(e.target.value)}
-              />
+              >
+                <option> </option>
+                <option> Hugo </option>
+                <option> DBL </option>
+                <option> Three vee</option>
+                <option> Spider </option>
+                <option> Dong Cheng </option>
+                <option> Makita </option>
+              </Form.Select>
             </Form.Group>
           </Row>
           <Row className="mb-2">
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Color </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                id="color"
-                name="color"
+              <Form.Select
+                aria-label="Default select example"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-              />
+              >
+                <option> </option>
+                <option> Red </option>
+                <option>Blue </option>
+                <option> Yellow </option>
+                <option> Green </option>
+              </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Technician</Form.Label>
               <Form.Select
                 aria-label="Default select example"
@@ -146,13 +198,13 @@ function AddRepair() {
                 onChange={(e) => setTechnician(e.target.value)}
               >
                 <option></option>
-                <option value="1">Thanu</option>
-                <option value="2">Sri</option>
+                <option value="Thanu">Thanu</option>
+                <option value="Sri">Sri</option>
               </Form.Select>
             </Form.Group>
           </Row>
           <Row className="mb-2">
-            <Form.Group as={Col} controlId="formGridAddress2">
+            <Form.Group as={Col}>
               <Form.Label>Received Date </Form.Label>
               <Form.Control
                 type="Date"
@@ -163,15 +215,15 @@ function AddRepair() {
                 onChange={(e) => setR_date(e.target.value)}
               />
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Group as={Col}>
               <Form.Label>Status</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 id="status"
                 name="status"
                 placeholder=" "
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
               >
                 <option> </option>
                 <option> Pending </option>

@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Pages.css";
 import * as MdIcons from "react-icons/md";
-import Table from "react-bootstrap/Table";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 function Technician() {
   const navigate = useNavigate();
@@ -14,16 +21,29 @@ function Technician() {
 
   const [technician, setTechnician] = useState([]);
 
-  const [name, setName] = useState("");
-  const [nic, setNic] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [appointment, setAppointment] = useState("");
-  const [epfno, setEpfno] = useState("");
-  const [salary, setSalary] = useState("");
-  const [address, setAddress] = useState("");
+  useEffect(() => {
+    getTechnician();
+  }, []);
 
-  const navigateToUpdateTechnician = () => {
-    navigate("/updatetechnician");
+  const getTechnician = async () => {
+    const response = await axios.get("http://localhost:5000/technician");
+    setTechnician(response.data);
+    console.log(response.data);
+  };
+
+  const deleteTechnician = async (id) => {
+    try {
+      if (window.confirm("Are you sure want to delete?")) {
+        await axios.delete(`http://localhost:5000/technician/${id}`);
+        getTechnician();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const navigateToUpdateTechnician = (id) => {
+    navigate(`/updatetechnician/${id}`);
   };
 
   return (
@@ -43,51 +63,63 @@ function Technician() {
           </Button>
         </div>
         <div className="table-control">
-          <Table striped className="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>NIC</th>
-                <th>Mobile No.</th>
-                <th>Appointment Type</th>
-                <th>EPF No.</th>
-                <th>Basic Salary</th>
-                <th>Address</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Thanu</td>
-                <td>994562321V</td>
-                <td>0754585365</td>
-                <td>Permanent</td>
-                <td>1257</td>
-                <td>20,000</td>
-                <td>Colombo</td>
-                <td>
-                  <Button
-                    variant="contained"
-                    onClick={navigateToUpdateTechnician}
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>NIC</TableCell>
+                  <TableCell>Mobile No.</TableCell>
+                  <TableCell>Appointment Type</TableCell>
+                  <TableCell>EPF No</TableCell>
+                  <TableCell>Basic Salary</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {technician.map((technician, index) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={technician.id}
                   >
-                    <MdIcons.MdCreate />
-                  </Button>{" "}
-                  &nbsp;
-                  <Button
-                    style={{
-                      padding: "5px",
-                      backgroundColor: "red",
-                    }}
-                    variant=""
-                  >
-                    <MdIcons.MdDelete />
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+                    <TableCell component="th" scope="row">
+                      {technician.name}
+                    </TableCell>
+                    <TableCell align="right">{technician.nic}</TableCell>
+                    <TableCell align="right">{technician.t_mobile}</TableCell>
+                    <TableCell align="right">
+                      {technician.appointmentType}
+                    </TableCell>
+                    <TableCell align="right">{technician.epfno}</TableCell>
+                    <TableCell align="right">{technician.salary}</TableCell>
+                    <TableCell align="right">{technician.t_address}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        onClick={() =>
+                          navigateToUpdateTechnician(technician.id)
+                        }
+                      >
+                        <MdIcons.MdCreate />
+                      </Button>
+                      &nbsp;
+                      <Button
+                        style={{
+                          padding: "5px",
+                          backgroundColor: "red",
+                        }}
+                        variant=""
+                        onClick={() => deleteTechnician(technician.id)}
+                      >
+                        <MdIcons.MdDelete />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </section>
     </div>
