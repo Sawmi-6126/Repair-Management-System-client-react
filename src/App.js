@@ -19,6 +19,7 @@ import Payment from "./Pages/Payment/Payment";
 import SidebarLayout from "./SidebarLayout";
 import RepairParts from "./Pages/Repair/RepairParts";
 import RepairNavLayout from "./RepairNavLayout";
+import Report from "./Pages/Report";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
               element={<UpdateTechnician />}
             />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/report" element={<Report />} />
           </Route>
         </Routes>
       </Router>

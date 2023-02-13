@@ -62,8 +62,20 @@
 
 .form-content,
 .page-content,
-.payment-content,
-.dashboard-content {
+.payment-content {
   margin-left: 25px;
   width: 75%;
+}
+
+.dashboard-content {
+  margin-left: 25%;
+  margin-top: 0;
+}
+
+.overview {
+  width: 100%;
+}
+
+.overvirew-content {
+  border: 1px solid black;
 }
