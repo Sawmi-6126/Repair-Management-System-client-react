@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import RepairNav from "./Components/RepairNav.js";
+import RepairNav from "../Components/RepairNav.js";
 
 function RepairNavLayout() {
   return (
