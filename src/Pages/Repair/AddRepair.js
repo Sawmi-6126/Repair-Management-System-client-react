@@ -20,6 +20,29 @@ function AddRepair() {
 
   const [mobile, setMobile] = useState("");
   const [customer_name, setName] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:5000/search?mobile=${mobile}`,
+        {}
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setName(data.f_name);
+        setError("");
+      } else {
+        setName("");
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      setName("");
+      setError("Internal server error");
+    }
+  };
 
   const [job_id, setJob_id] = useState("");
   const [m_type, setType] = useState("");
@@ -34,7 +57,7 @@ function AddRepair() {
     try {
       await axios.post("http://localhost:5000/repair", {
         job_id,
-        //customer_name,
+        customer_name,
         m_type,
         m_brand,
         color,
@@ -48,16 +71,6 @@ function AddRepair() {
     }
   };
 
-  const getCustomerName = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.get("http://localhost:5000/customer", {
-        mobile,
-        customer_name,
-      });
-    } catch (error) {}
-  };
-
   return (
     <div className="form-content">
       <section className="section">
@@ -68,7 +81,7 @@ function AddRepair() {
           </h5>
           <hr />
         </div>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Row className="mb-2">
             <Form.Group>
               <Form.Label>Customer mobile</Form.Label>
@@ -83,13 +96,9 @@ function AddRepair() {
                   name="mobile"
                   autoComplete="off"
                   value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  onChange={(event) => setMobile(event.target.value)}
                 />
-                <Button
-                  variant="primary"
-                  id="button-addon2"
-                  onClick={getCustomerName}
-                >
+                <Button variant="primary" id="button-addon2">
                   Search
                 </Button>
               </InputGroup>
@@ -100,15 +109,16 @@ function AddRepair() {
               <Form.Control
                 type="text"
                 placeholder=""
-                id="name"
+                id="customer_name"
                 name="name"
                 autoComplete="off"
                 value={customer_name}
-                onChange={(e) => setName(e.target.value)}
+                readOnly
               />
             </Form.Group>
           </Row>
         </Form>
+        {error && <p>Error: {error}</p>}
         &nbsp;
         <div className="col-md-6">
           <h5>

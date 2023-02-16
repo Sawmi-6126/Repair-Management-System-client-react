@@ -16,10 +16,10 @@ import Signin from "./Pages/Login/Signin";
 import AddRepair from "./Pages/Repair/AddRepair";
 import UpdateRepair from "./Pages/Repair/UpdateRepair";
 import Payment from "./Pages/Payment/Payment";
-import SidebarLayout from "./SidebarLayout";
+import SidebarLayout from "./layout/SidebarLayout";
 import RepairParts from "./Pages/Repair/RepairParts";
-import RepairNavLayout from "./RepairNavLayout";
-import Report from "./Pages/Report";
+import RepairNavLayout from "./layout/RepairNavLayout";
+import Report from "./Pages/Report/Report.js";
 
 function App() {
   return (

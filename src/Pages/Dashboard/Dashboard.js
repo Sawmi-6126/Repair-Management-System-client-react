@@ -3,14 +3,12 @@ import "../Styles/Pages.css";
 
 function Dashboard() {
   return (
-    <>
-      <div className="dashboard-content">
-        <div className="overview-component">
-          <div className="overview">Overview</div>
-          <div className="overview-content"></div>
-        </div>
-      </div>
-    </>
+    <div className="overview-component">
+      <section className="section">
+        <div className="overview">Overview</div>
+        <div className="overview-content"></div>
+      </section>
+    </div>
   );
 }
 

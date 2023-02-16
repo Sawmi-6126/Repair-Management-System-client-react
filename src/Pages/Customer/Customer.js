@@ -49,7 +49,7 @@ function Customer() {
   return (
     <>
       <div className="page-content">
-        <section className="section-main">
+        <section className="section">
           <div className="col-md-6">
             <h5>
               <MdIcons.MdPerson /> &nbsp;

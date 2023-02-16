@@ -48,7 +48,7 @@ function Parts() {
 
   return (
     <div className="page-content">
-      <section className="section-main">
+      <section className="section">
         <div className="col-md-6">
           <h5>
             <FaIcons.FaTools /> &nbsp;

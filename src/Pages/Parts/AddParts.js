@@ -19,7 +19,7 @@ function AddParts() {
   const [description, setDescription] = useState("");
   const [unit_price, setUnitPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [discount, setDiscount] = useState("%");
+  const [discount, setDiscount] = useState("");
 
   const saveParts = async (e) => {
     e.preventDefault();

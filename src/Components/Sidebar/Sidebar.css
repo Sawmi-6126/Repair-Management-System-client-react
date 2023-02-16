@@ -17,12 +17,12 @@
 .nav-menu {
   background-color: #060b26;
   width: 250px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
-  /* margin-top: 80px; */
+  margin-top: 80px;
   left: -100%;
   transition: 850ms;
 }
@@ -30,7 +30,8 @@
 .nav-menu.active {
   left: 0;
   transition: 350ms;
-  position: fixed;
+  position: absolute;
+  margin-top: 80px;
 }
 
 .nav-text {
