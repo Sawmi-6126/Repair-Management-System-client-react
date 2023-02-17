@@ -11,7 +11,11 @@ import Header from "./Header";
 
 function Sidebar() {
   const [sidebar, setSidebar] = useState(false); // useState value is false because the side bar not to be shown
-  const showSidebar = () => setSidebar(!sidebar);
+  //const [isNavOpen, setIsNavOpen] = useState(false);
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+    //setIsNavOpen(!isNavOpen);
+  };
 
   const navigate = useNavigate();
   const navigateToSignin = () => {
@@ -29,7 +33,7 @@ function Sidebar() {
   };
 
   return (
-    <>
+    <div>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
@@ -74,7 +78,7 @@ function Sidebar() {
           </ul>
         </nav>
       </IconContext.Provider>
-    </>
+    </div>
   );
 }
 

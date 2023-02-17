@@ -85,3 +85,8 @@ span {
   left: 0;
   width: 100%;
 }
+
+/* .main {
+  transform: translateX(+250px);
+  transition: transform 0.3s ease-out;
+} */
