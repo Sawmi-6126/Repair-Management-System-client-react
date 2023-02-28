@@ -47,8 +47,14 @@ function Technician() {
   };
 
   return (
-    <div className="page-content">
+    <div className="main">
       <section className="section">
+        <div className="components">
+          <Button variant="contained" onClick={navigateToAddTechnician}>
+            <MdIcons.MdAdd />
+            Add New Technician
+          </Button>
+        </div>
         <div className="col-md-6">
           <h5>
             <MdIcons.MdManageAccounts /> &nbsp;
@@ -56,12 +62,7 @@ function Technician() {
           </h5>
           <hr></hr>
         </div>
-        <div className="components">
-          <Button variant="contained" onClick={navigateToAddTechnician}>
-            <MdIcons.MdAdd />
-            Add New Technician
-          </Button>
-        </div>
+
         <div className="table-control">
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">

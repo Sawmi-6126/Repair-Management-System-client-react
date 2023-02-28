@@ -53,7 +53,7 @@ function UpdateCustomer() {
   };
 
   return (
-    <div className="form-content">
+    <div className="main">
       <section className="section">
         <div className="col-md-6">
           <h5>

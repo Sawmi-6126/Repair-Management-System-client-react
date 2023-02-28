@@ -20,6 +20,7 @@ import SidebarLayout from "./layout/SidebarLayout";
 import RepairParts from "./Pages/Repair/RepairParts";
 import RepairNavLayout from "./layout/RepairNavLayout";
 import Report from "./Pages/Report/Report.js";
+import PaymentForm from "./Pages/Payment/PaymentForm";
 
 function App() {
   return (
@@ -41,10 +42,10 @@ function App() {
             <Route path="/updateparts/:id" element={<UpdateParts />} />
             <Route path="/repair" element={<Repair />} />
             <Route path="/addrepair" element={<AddRepair />} />
-            <Route element={<RepairNavLayout />}>
-              <Route path="/repairparts" element={<RepairParts />} />
-              <Route path="/updaterepair/:id" element={<UpdateRepair />} />
-            </Route>
+            {/* <Route element={<RepairNavLayout />}> */}
+            <Route path="/repairparts" element={<RepairParts />} />
+            <Route path="/updaterepair/:id" element={<UpdateRepair />} />
+            {/* </Route> */}
             <Route path="/technician" element={<Technician />} />
             <Route path="/addtechnician" element={<AddTechnician />} />
             <Route
@@ -53,6 +54,7 @@ function App() {
             />
             <Route path="/payment" element={<Payment />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/paymentform" element={<PaymentForm />} />
           </Route>
         </Routes>
       </Router>

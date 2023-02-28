@@ -48,21 +48,21 @@ function Repair() {
   };
 
   return (
-    <div className="page-content">
+    <div className="main">
       <section className="section">
+        <div className="components">
+          <Button variant="contained" onClick={navigateToAddNewRepair}>
+            <MdIcons.MdAdd />
+            Add New Repair Details
+          </Button>
+        </div>
+
         <div className="col-md-6">
           <h5>
             <FaIcons.FaTools /> &nbsp;
             <b> Repair</b>
           </h5>
           <hr></hr>
-        </div>
-
-        <div className="components">
-          <Button variant="contained" onClick={navigateToAddNewRepair}>
-            <MdIcons.MdAdd />
-            Add New Repair Details
-          </Button>
         </div>
 
         <div className="table-control">

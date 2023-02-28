@@ -22,7 +22,14 @@ function AddRepair() {
   const [customer_name, setName] = useState("");
   const [error, setError] = useState("");
 
+  // const handleChange = (event) => {
+  //   setMobile(event.target.value);
+  //   // call additional function here
+  //   handleSubmit();
+  // };
+
   const handleSubmit = async (event) => {
+    console.log(event);
     event.preventDefault();
     try {
       const response = await fetch(
@@ -31,7 +38,8 @@ function AddRepair() {
       );
       if (response.ok) {
         const data = await response.json();
-        setName(data.f_name);
+        console.log(data);
+        setName(data.customerName);
         setError("");
       } else {
         setName("");
@@ -71,8 +79,17 @@ function AddRepair() {
     }
   };
 
+  const displayJobId = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("http://localhost:5000/search/jobid");
+      setJob_id(response.data);
+      console.log(response.data);
+    } catch (error) {}
+  };
+
   return (
-    <div className="form-content">
+    <div className="main">
       <section className="section">
         <div className="col-md-6">
           <h5>
@@ -81,7 +98,7 @@ function AddRepair() {
           </h5>
           <hr />
         </div>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Row className="mb-2">
             <Form.Group>
               <Form.Label>Customer mobile</Form.Label>
@@ -90,7 +107,6 @@ function AddRepair() {
                   type="number"
                   placeholder=""
                   size="sm"
-                  aria-label=""
                   aria-describedby="basic-addon2"
                   id="mobile"
                   name="mobile"
@@ -98,7 +114,11 @@ function AddRepair() {
                   value={mobile}
                   onChange={(event) => setMobile(event.target.value)}
                 />
-                <Button variant="primary" id="button-addon2">
+                <Button
+                  variant="primary"
+                  id="button-addon2"
+                  onClick={handleSubmit}
+                >
                   Search
                 </Button>
               </InputGroup>
@@ -119,7 +139,7 @@ function AddRepair() {
           </Row>
         </Form>
         {error && <p>Error: {error}</p>}
-        &nbsp;
+        {/* &nbsp; */}
         <div className="col-md-6">
           <h5>
             <MdIcons.MdPersonAddAlt1 /> &nbsp;
@@ -152,6 +172,7 @@ function AddRepair() {
               <Form.Label>Machine Type</Form.Label>
               <Form.Select
                 aria-label="Default select example"
+                size="sm"
                 value={m_type}
                 onChange={(e) => setType(e.target.value)}
               >
@@ -170,6 +191,7 @@ function AddRepair() {
               <Form.Label>Brand</Form.Label>
               <Form.Select
                 aria-label="Default select example"
+                size="sm"
                 value={m_brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
@@ -188,6 +210,7 @@ function AddRepair() {
               <Form.Label>Color </Form.Label>
               <Form.Select
                 aria-label="Default select example"
+                size="sm"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
               >
@@ -204,6 +227,7 @@ function AddRepair() {
                 aria-label="Default select example"
                 id="technician"
                 name="technician"
+                size="sm"
                 value={technician}
                 onChange={(e) => setTechnician(e.target.value)}
               >
@@ -218,6 +242,7 @@ function AddRepair() {
               <Form.Label>Received Date </Form.Label>
               <Form.Control
                 type="Date"
+                size="sm"
                 placeholder=""
                 id="r_Date"
                 name="r_Date"
@@ -229,6 +254,7 @@ function AddRepair() {
               <Form.Label>Status</Form.Label>
               <Form.Select
                 aria-label="Default select example"
+                size="sm"
                 id="status"
                 name="status"
                 placeholder=" "

@@ -55,6 +55,16 @@ function Signup() {
               </span>
             </div>
             <div className="form-group mt-3">
+              <label>Email</label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="Email..."
+                id="email"
+                autoComplete="off"
+              />
+            </div>
+            <div className="form-group mt-3">
               <label>Username</label>
               <Field
                 type="String"
@@ -79,15 +89,6 @@ function Signup() {
               />
               <ErrorMessage name="password" />
             </div>
-            {/* <div className="form-group mt-3">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Re-Enter Password"
-                id="passwordcheck"
-              />
-            </div> */}
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
                 Register

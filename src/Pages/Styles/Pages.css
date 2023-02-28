@@ -1,19 +1,27 @@
 .section {
-  width: 80%;
+  width: 100%;
   height: 100%;
   margin-top: 20px;
-  margin-left: 23%;
+  /* margin-left: 16%; */
   margin-right: 20%;
-  padding: 20px;
+  padding: 10px 15px;
   align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.section-dashboard {
+  width: 100%;
+  height: 600px;
+  /* margin-left: 16%; */
+  padding: 20px;
+  margin-right: 25px;
+  align-items: center;
+  /* border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .components {
   float: right;
   margin: 15x;
-  /* padding: 8px; */
   position: relative;
 }
 
@@ -22,53 +30,144 @@
   margin-top: 10px;
 }
 
-.search {
+/* .search {
   float: left;
   margin-top: 25px;
   position: relative;
   margin-left: 0;
-}
+} */
 
 .bottom-buttons {
   margin-top: 5px;
 }
 
-.payment-component {
-  width: 100%;
-  margin-top: 100px;
-}
-
 .payment-view {
-  float: left;
-  margin-left: 10px;
   width: 80%;
 }
 
 .payment-form {
-  margin-left: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 50%;
-  padding: 20px;
-  margin-top: 50px;
+  width: 100%;
+  padding: 10px;
 }
 
-.form-content,
-.page-content,
-.payment-content {
-  margin-left: 25px;
+.main {
   width: 80%;
+  margin-left: 250px;
 }
 
-.overview-component,
 .report-content {
   width: 80%;
 }
 
 .overview {
-  width: 50%;
+  width: 100%;
+  margin-bottom: auto;
 }
 
-/* .overvirew-content {
-  border: 1px solid black;
-} */
+.overview a {
+  color: black;
+}
+
+.section-dashboard .date {
+  float: right;
+  font-size: large;
+}
+
+.daily-tasks {
+  width: 100%;
+  padding-top: 100px;
+}
+
+.daily-tasks h6 {
+  padding: 5px;
+}
+
+.overview-customer {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 250px;
+  height: 125px;
+  padding: 15px;
+  text-align: center;
+  color: black;
+  float: left;
+  background-color: #b2babb;
+}
+
+.overview-tasks {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 250px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #85929e;
+  color: black;
+  float: left;
+}
+
+.overview-technician {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 250px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #808b96;
+  color: black;
+  float: left;
+}
+
+.pending-task {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 220px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #f39c12;
+  color: black;
+  float: left;
+}
+
+.ongoing-task {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 220px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #ffa500;
+  color: black;
+  float: left;
+}
+
+.completed-task {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 220px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #e67e22;
+  color: black;
+  float: left;
+}
+
+.paid-task {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 220px;
+  height: 125px;
+  padding: 15px;
+  margin-left: 15px;
+  text-align: center;
+  background-color: #dc7633;
+  color: black;
+  float: left;
+}

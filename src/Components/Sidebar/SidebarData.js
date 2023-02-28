@@ -18,12 +18,6 @@ export const SidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
-  // {
-  //   title: "Machine",
-  //   path: "machine",
-  //   icon: <FaIcons.FaTools />,
-  //   cName: "nav-text",
-  // },
   {
     title: "Repair",
     path: "/repair",

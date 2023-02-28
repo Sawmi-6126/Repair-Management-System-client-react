@@ -2,7 +2,7 @@ import React from "react";
 
 function Report() {
   return (
-    <div className="report-content">
+    <div className="main">
       <section className="section">Report</section>
     </div>
   );

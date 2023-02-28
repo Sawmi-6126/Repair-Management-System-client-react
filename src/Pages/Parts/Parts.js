@@ -47,8 +47,14 @@ function Parts() {
   };
 
   return (
-    <div className="page-content">
+    <div className="main">
       <section className="section">
+        <div className="components">
+          <Button variant="contained" onClick={navigateToAddParts}>
+            <MdIcons.MdAdd />
+            Add New Part
+          </Button>
+        </div>
         <div className="col-md-6">
           <h5>
             <FaIcons.FaTools /> &nbsp;
@@ -56,15 +62,14 @@ function Parts() {
           </h5>
           <hr></hr>
         </div>
-        <div className="components">
-          <Button variant="contained" onClick={navigateToAddParts}>
-            <MdIcons.MdAdd />
-            Add New Part
-          </Button>
-        </div>
+
         <div className="table-control">
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table
+              sx={{ minWidth: 650 }}
+              stickyHeader
+              aria-label="sticky table"
+            >
               <TableHead>
                 <TableRow>
                   <TableCell>Barcode</TableCell>
