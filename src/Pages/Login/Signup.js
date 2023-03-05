@@ -2,7 +2,7 @@ import React from "react";
 import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import tools from "../../Images/landingpage.jpg";
 import axios from "axios";
 import { Formik, ErrorMessage, Form, Field } from "formik";
@@ -74,7 +74,9 @@ function Signup() {
                 name="username"
                 autoComplete="off"
               />
-              <ErrorMessage name="username" />
+              <span style={{ color: "red" }}>
+                <ErrorMessage name="username" />
+              </span>
             </div>
             <div className="form-group mt-3">
               <label>Password</label>
@@ -87,7 +89,9 @@ function Signup() {
                 autoComplete="off"
                 pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
               />
-              <ErrorMessage name="password" />
+              <span style={{ color: "red" }}>
+                <ErrorMessage name="password" />
+              </span>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">

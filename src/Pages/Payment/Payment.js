@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import PaymentForm from "./PaymentForm";
 import Button from "react-bootstrap/Button";
+import { TableBody } from "@mui/material";
 
 function Payment() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -40,6 +41,17 @@ function Payment() {
                   <TableCell align="right">Actions</TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           </TableContainer>
         </div>
@@ -49,3 +61,5 @@ function Payment() {
 }
 
 export default Payment;
+
+//FaPrint
